@@ -1,0 +1,15 @@
+{
+    "type": "mysql",
+    "host": "localhost",
+    "port": 3306, /* CHANGE TO YOUR PORT */
+    "username": "{CHANGE TO YOUR DATABASE USERNAME}",
+    "password": "{CHANGE TO YOUR DATABASE PASSWORD}",
+    "database": "{CHANGE TO YOUR DATABASE}",
+    "entities": ["build/core/domain/entities/*.js"],
+    "migrations": ["build/infrastructure/migration/*.js"],
+    "cli": {
+        "migrationsDir": "src/infrastructure/migration"
+    },
+    "logging": true,
+    "synchronize": false
+}

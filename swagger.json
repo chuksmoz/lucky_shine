@@ -1,0 +1,131 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Lucky Shine Project",
+    "description": "Lucky Shine Application API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:4040",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "treasures"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+
+  "definitions": {
+    "treasures": {
+      "type":"object",
+      "properties":{
+        "isSuccessResponse": {
+            "type": "boolean"
+        },
+        "message": {
+            "type":"string"
+        },
+
+        "data":{
+            "type": "array",
+      "required": ["name", "id", "latitude", "longitude", "moneyValues"],
+      "items":{
+          "type" :"object",
+          "properties": {
+        "id": {
+          "type": "integer",
+          "uniqueItems": true
+        },
+        "latitude": {
+          "type": "string"
+        },
+        "longitude": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "moneyValues": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "amt": {
+                "type": "number"
+              },
+              
+              "treasureId": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+      }
+        }
+      }
+      
+      
+    },
+    "getTreasureRequest": {
+      
+      "required": ["latitude", "longitude", "distance"],
+       "properties": {
+        "distance": {
+          "type": "integer",
+          "uniqueItems": true
+        },
+        "latitude": {
+          "type": "string"
+        },
+        "longitude": {
+          "type": "string"
+        },
+        "priceValue": {
+          "type": "integer"
+          
+      }
+      }
+      
+    }
+},
+
+
+   "paths": {
+    
+    "/treasures": {
+      "post": {
+        "tags": ["Treasures"],
+        "description": "Get treasures within a location",
+        "parameters": [
+          {
+            "name": "treasures",
+            "in": "body",
+            "description": "treasures that we want to get",
+            "schema": {
+              "$ref": "#/definitions/getTreasureRequest"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": " list treasures ",
+            "schema": {
+              "$ref": "#/definitions/treasures"
+            }
+          }
+        }
+      }
+    }
+  }
+
+}
